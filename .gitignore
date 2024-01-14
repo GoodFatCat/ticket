@@ -1,5 +1,6 @@
 # Java related
 target/**
+**/target/
 *.jar
 *.war
 *.ear
@@ -31,3 +32,4 @@ local.properties
 
 # My ignore
 /eventservice/log/
+/eventservice/src/test/java/com/github/goodfatcat/eventservice/service/MyTest.java
