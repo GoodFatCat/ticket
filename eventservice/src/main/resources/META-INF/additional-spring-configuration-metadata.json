@@ -1,0 +1,14 @@
+{
+	"properties": [
+		{
+		  "name": "files.types",
+		  "type": "java.lang.String[]",
+		  "description": "Types of files supported to save"
+		},
+		{
+			"name": "files.directory-to-save-files",
+			"type": "java.lang.String",
+			"description": "Name of directory to save files"
+		}
+	]
+}
