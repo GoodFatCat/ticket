@@ -57,5 +57,7 @@
   <modules>
   	<module>api-gateway</module>
   	<module>eventservice</module>
+  	<module>ticketservice</module>
+  	<module>SeatTicketTypeService</module>
   </modules>
 </project>

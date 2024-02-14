@@ -18,6 +18,7 @@ public class EventResponse {
 	private List<String> fileNames;
 	private LocalDateTime eventDateTime;
 	private String description;
+	private Integer numberSeats;
 	
 	public EventResponse(Event event) {
 		this.id = event.getId();
@@ -25,5 +26,6 @@ public class EventResponse {
 		this.fileNames = event.getFileNames();
 		this.eventDateTime = event.getEventDateTime();
 		this.description = event.getDescription();
+		this.numberSeats = event.getNumberSeats();
 	}
 }

@@ -15,5 +15,6 @@ public class EventRequest {
 	private String name;
 	private LocalDateTime eventDateTime;
 	private String description;
+	private Integer numberSeats;
 	private MultipartFile[] files;
 }

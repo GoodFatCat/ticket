@@ -31,11 +31,13 @@ public class Event {
 	private List<String> fileNames;
 	private LocalDateTime eventDateTime;
 	private String description;
+	private Integer numberSeats;
 	
 	public Event(EventRequest request, List<String> fileNames) {
 		this.name = request.getName();
 		this.eventDateTime = request.getEventDateTime();
 		this.description = request.getDescription();
+		this.numberSeats = request.getNumberSeats();
 		this.fileNames = fileNames;
 	}
 }

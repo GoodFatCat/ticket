@@ -28,7 +28,7 @@ class EventServiceImplTest {
 		
 		LocalDateTime now = LocalDateTime.now();
 		
-		EventRequest request = new EventRequest("Name", now, "Description", new MultipartFile[] {mockMultipartFile});
+		EventRequest request = new EventRequest("Name", now, "Description", 15, new MultipartFile[] {mockMultipartFile});
 		
 		String fileNamePrefix = String.format("%s-%d-%d-%d-", request.getName(),
 				now.getYear(), now.getMonth().getValue(),
@@ -40,7 +40,7 @@ class EventServiceImplTest {
 		
 		Mockito.when(storageService.saveFiles(fileNamePrefix, request.getFiles())).thenReturn(List.of(fileNames));
 		
-		Event savedEvent = new Event(1L, "Name", List.of(mockMultipartFile.getOriginalFilename()), now, "Description");
+		Event savedEvent = new Event(1L, "Name", List.of(mockMultipartFile.getOriginalFilename()), now, "Description", 15);
 		
 		Mockito.when(repository.save(eventToSave)).thenReturn(savedEvent);
 		
