@@ -3,7 +3,9 @@ package com.github.goodfatcat.eventservice.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,27 +28,40 @@ public class InFileSystemStorageService implements StorageService {
 	private FileConfiguration configuration;
 
 	@Override
-	public List<String> saveFiles(String fileNamePrefix, MultipartFile[] files) {
+	public List<String> saveFiles(String fileNamePrefix,
+			MultipartFile[] files) {
 		List<String> fileNames = new ArrayList<>();
-		
+
 		Arrays.stream(files).forEach(file -> {
 			checker.isFileSupported(file);
-			
+
 			String fileName = fileNamePrefix + file.getOriginalFilename();
-			
-			Path copyTo = Path.of(configuration.getDirectoryToSaveFiles() + "\\" + fileName);
-			
-			try(InputStream fileInputStream = file.getInputStream()) {
-				Files.copy(fileInputStream, copyTo, StandardCopyOption.REPLACE_EXISTING);
+
+			Path copyTo = Path.of(
+					configuration.getDirectoryToSaveFiles() + "\\" + fileName);
+
+			try (InputStream fileInputStream = file.getInputStream()) {
+				Files.copy(fileInputStream, copyTo,
+						StandardCopyOption.REPLACE_EXISTING);
 			} catch (IOException e) {
 				log.error(e.getMessage());
 				throw new RuntimeException(e);
 			}
-			
+
 			fileNames.add(fileName);
 		});
-		
+
 		return fileNames;
 	}
 
+	@Override
+	public byte[] getFileByName(String fileName) throws IOException {
+		Path path = Paths.get(configuration.getDirectoryToSaveFiles() + "\\" + fileName);
+		
+		if (Files.exists(path) && Files.isReadable(path)) {
+			return Files.readAllBytes(path);
+		}
+		
+		throw new NoSuchFileException(fileName);
+	}
 }

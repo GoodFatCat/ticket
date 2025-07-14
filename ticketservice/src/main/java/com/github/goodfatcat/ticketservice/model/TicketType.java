@@ -3,6 +3,8 @@ package com.github.goodfatcat.ticketservice.model;
 import com.github.goodfatcat.ticketservice.dto.TicketTypeRequest;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TicketType {
+	@Id
+	@GeneratedValue
 	private Long id;
 	private String type;
 	
