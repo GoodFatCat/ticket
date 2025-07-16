@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.goodfatcat.eventservice.dto.EventRequest;
 import com.github.goodfatcat.eventservice.dto.EventResponse;
+import com.github.goodfatcat.eventservice.dto.EventResponseWithFiles;
 import com.github.goodfatcat.eventservice.service.EventService;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -30,8 +30,9 @@ public class EventController {
 	}
 	
 	@GetMapping("/{id}")
-	public String getMethodName(@PathVariable Long id) {
-		return null;
+	@ResponseStatus(code = HttpStatus.OK)
+	public EventResponseWithFiles getEventById(@PathVariable Long id) {
+		return eventService.getEvent(id);
 	}
 	
 }
