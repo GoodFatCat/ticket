@@ -39,6 +39,6 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 		exceptionResponse.setStatus(500);
 		exceptionResponse.setTimestamp(LocalDateTime.now());
 
-		return ResponseEntity.badRequest().body(exceptionResponse);
+		return ResponseEntity.internalServerError().body(exceptionResponse);
 	}
 }

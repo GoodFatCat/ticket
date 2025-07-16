@@ -16,9 +16,19 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Slf4j
 public class SupportedFileChecker {
-	
+
 	private FileConfiguration supportedFilesConfiguration;
-	
+
+	/**
+	 * Check are files supported or not otherwise throws Exception
+	 * 
+	 * @param file
+	 * @throws {@link
+	 *             com.github.goodfatcat.eventservice.exception.EmptyFileException}
+	 *             or
+	 *             {@link com.github.goodfatcat.eventservice.exception.UnsupportedFileException}
+	 * @return Boo
+	 */
 	public boolean isFileSupported(MultipartFile file) {
 		if (file.isEmpty()) {
 			log.info(file.toString() + " is empty");
@@ -26,11 +36,11 @@ public class SupportedFileChecker {
 		}
 		String fileType = file.getContentType().split("/")[0];
 		long count = Arrays.stream(supportedFilesConfiguration.getTypes())
-				.filter(type -> type.equals(fileType))
-				.count();	
+				.filter(type -> type.equals(fileType)).count();
 		if (count == 0) {
 			log.info(file.toString() + " is unsupported");
-			throw new UnsupportedFileException(String.format("File type %s is not supported", file.getContentType()));
+			throw new UnsupportedFileException(String.format(
+					"File type %s is not supported", file.getContentType()));
 		}
 		return count > 0;
 	}
